@@ -16,8 +16,6 @@ Prereq:		mozilla-embedded
 BuildRequires:	mozilla-embedded-devel
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
-%define		_prefix		/usr/X11R6
-%define		_mandir		%{_prefix}/man
 
 %description
 Plugger is a plugin which can show many types of multimedia inside
