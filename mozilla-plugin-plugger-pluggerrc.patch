@@ -1,0 +1,12 @@
+diff -urN plugger-4.0.orig/pluggerrc plugger-4.0/pluggerrc
+--- plugger-4.0.orig/pluggerrc	Wed Dec  5 20:14:01 2001
++++ plugger-4.0/pluggerrc	Mon Jun 17 22:00:31 2002
+@@ -159,7 +159,7 @@
+ application/rtf: rtf: Rich Text Format
+ application/x-msword: doc, dot: Microsoft Word Document
+ application/msword: doc, dot: Microsoft Word Document
+-	repeat swallow(AbiWord) fill: abiword -nosplash -geometry +9000+9000 "$file" >/dev/null 2>/dev/null
++	repeat swallow(AbiWord) fill: abiword --nosplash "$file" >/dev/null 2>/dev/null
+ 	repeat swallow(PCFileViewer) fill: sdtpcv "$file"
+ 	repeat swallow(PCFileViewer) fill: /opt/SUNWdtpcv/bin/sdtpcv "$file"
+ 
