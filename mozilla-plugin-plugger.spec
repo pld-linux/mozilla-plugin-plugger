@@ -2,7 +2,7 @@ Summary:	Mozilla multimedia plugin
 Summary(pl):	Wtyczka Mozilli do multimediów
 Name:		mozilla-plugin-plugger
 Version:	4.0
-Release:	2
+Release:	3
 License:	GPL
 Group:		X11/Applications/Multimedia
 Source0:	http://fredrik.hubbe.net/plugger/plugger-%{version}.tar.gz
@@ -10,7 +10,7 @@ Source1:	%{name}-npunix.c
 Patch0:		%{name}-instance.patch
 URL:		http://fredrik.hubbe.net/plugger.html
 Prereq:		mozilla-embedded
-BuildRequires:	mozilla-devel
+BuildRequires:	mozilla-embedded-devel
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		_prefix		/usr/X11R6
@@ -28,12 +28,12 @@ na Mozilli, np.: mozilli jako takiej, galeona czy te¿ skipstone'a.
 %setup -q -n plugger-%{version}
 %patch0 -p1
 mkdir common
-cp %{SOURCE1} common/npunix.c
+cp -f %{SOURCE1} common/npunix.c
 
 %build
 CF="%{rpmcflags} -fpic -I%{_includedir}/mozilla"
 CF="$CF -I%{_includedir}/mozilla/java -I/usr/include/nspr -I%{_includedir}/mozilla/plugin"
-make all \
+%{__make} all \
         XCFLAGS="$CF" NORM_CFLAGS="$CF" \
         XLDFLAGS=-shared \
         CC=%{__cc} LD=%{__cc} \
@@ -47,7 +47,8 @@ install *.so $RPM_BUILD_ROOT%{_libdir}/mozilla/plugins
 install pluggerrc $RPM_BUILD_ROOT%{_sysconfdir}
 install plugger-%{version} $RPM_BUILD_ROOT%{_bindir}
 install *.7 $RPM_BUILD_ROOT%{_mandir}/man7
-ln -s pluggerrc $RPM_BUILD_ROOT%{_sysconfdir}/pluggerrc-%{version}
+ln -sf pluggerrc $RPM_BUILD_ROOT%{_sysconfdir}/pluggerrc-%{version}
+
 gzip -9nf README
 
 %clean
@@ -56,8 +57,8 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(644,root,root,755)
 %doc *.gz
-%{_mandir}/*/*
-%config %{_sysconfdir}/pluggerrc
-%{_sysconfdir}/pluggerrc-*
 %attr(755,root,root) %{_bindir}/*
-%{_libdir}/mozilla/plugins/*.so
+%attr(755,root,root) %{_libdir}/mozilla/plugins/*.so
+%{_mandir}/*/*
+%config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/pluggerrc
+%{_sysconfdir}/pluggerrc-*
