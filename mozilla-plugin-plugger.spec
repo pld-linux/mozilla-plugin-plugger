@@ -2,14 +2,15 @@ Summary:	Mozilla multimedia plugin
 Summary(pl):	Wtyczka Mozilli do multimediów
 Name:		mozilla-plugin-plugger
 Version:	4.0
-Release:	1
+Release:	2
 License:	GPL
 Group:		X11/Applications/Multimedia
-Source0:	http://fredrik.hubbe.net/plugger/plugger-%{version}-linux-x86-glibc.tar.gz
+Source0:	http://fredrik.hubbe.net/plugger/plugger-%{version}.tar.gz
+Source1:	%{name}-npunix.c
+Patch0:		%{name}-instance.patch
 URL:		http://fredrik.hubbe.net/plugger.html
 Prereq:		mozilla-embedded
-ExclusiveArch:	%{ix86}
-ExclusiveOS:	Linux
+BuildRequires:	mozilla-devel
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		_prefix		/usr/X11R6
@@ -25,6 +26,18 @@ na Mozilli, np.: mozilli jako takiej, galeona czy te¿ skipstone'a.
 
 %prep
 %setup -q -n plugger-%{version}
+%patch0 -p1
+mkdir common
+cp %{SOURCE1} common/npunix.c
+
+%build
+CF="%{rpmcflags} -fpic -I%{_includedir}/mozilla"
+CF="$CF -I%{_includedir}/mozilla/java -I/usr/include/nspr"
+make all \
+        XCFLAGS="$CF" NORM_CFLAGS="$CF" \
+        XLDFLAGS=-shared \
+        CC=%{__cc} LD=%{__cc} \
+        SDK=. X11=%{_prefix}
 
 %install
 rm -rf $RPM_BUILD_ROOT
