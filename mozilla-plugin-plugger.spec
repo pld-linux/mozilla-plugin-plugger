@@ -13,7 +13,7 @@ URL:		http://fredrik.hubbe.net/plugger.html
 BuildRequires:	mozilla-embedded-devel
 Requires:	m4
 PreReq:		mozilla-embedded
-Obsoletes:      mozilla-plugin-mozplugger
+Obsoletes:	mozilla-plugin-mozplugger
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		mozilladir	/usr/%{_lib}/mozilla
