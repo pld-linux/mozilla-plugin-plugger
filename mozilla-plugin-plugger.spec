@@ -2,7 +2,7 @@ Summary:	Mozilla multimedia plugin
 Summary(pl):	Wtyczka Mozilli do multimediów
 Name:		mozilla-plugin-plugger
 Version:	4.0
-Release:	3
+Release:	4
 License:	GPL
 Group:		X11/Applications/Multimedia
 Source0:	http://fredrik.hubbe.net/plugger/plugger-%{version}.tar.gz
@@ -49,14 +49,12 @@ install plugger-%{version} $RPM_BUILD_ROOT%{_bindir}
 install *.7 $RPM_BUILD_ROOT%{_mandir}/man7
 ln -sf pluggerrc $RPM_BUILD_ROOT%{_sysconfdir}/pluggerrc-%{version}
 
-gzip -9nf README
-
 %clean
 rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc *.gz
+%doc README
 %attr(755,root,root) %{_bindir}/*
 %attr(755,root,root) %{_libdir}/mozilla/plugins/*.so
 %{_mandir}/*/*
