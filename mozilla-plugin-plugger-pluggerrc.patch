@@ -1,12 +1,110 @@
-diff -urN plugger-4.0.orig/pluggerrc plugger-4.0/pluggerrc
---- plugger-4.0.orig/pluggerrc	Wed Dec  5 20:14:01 2001
-+++ plugger-4.0/pluggerrc	Mon Jun 17 22:00:31 2002
-@@ -159,7 +159,7 @@
+--- plugger-4.0/pluggerrc~	Wed Dec  5 20:14:01 2001
++++ plugger-4.0/pluggerrc	Tue Jun 18 08:45:11 2002
+@@ -4,14 +4,21 @@
+ #
+ video/mpeg: mpeg, mpg, mpe: MPEG animation
+ video/x-mpeg: mpeg, mpg, mpe: MPEG animation
+-video/x-mpeg2: mpv2, mp2ve: MPEG2 animation
+-	stream: mtvp -W$window - 2>/dev/null 1>/dev/null
++	exits nokill: xine -pq "$file" 2>/dev/null 1>/dev/null
+ 	ignore_errors maxaspect swallow(MPlayer):mplayer "$file" >/dev/null 2>/dev/null </dev/null
++	stream: mtvp -W$window - 2>/dev/null 1>/dev/null
+ 	loop:mtvp -l -W$window "$file"
+ 	:mtvp -W$window "$file"
+ 	loop: xanim +Av100 -Zr +W$window +q +f "$file"
+ 	: xanim +Av100 -Zr +W$window +q +Ze +f "$file"
+-
++video/x-mpeg2: mpv2, mp2ve: MPEG2 animation
++	exits nokill: xine -pq "$file" 2>/dev/null 1>/dev/null
++	ignore_errors maxaspect swallow(MPlayer):mplayer "$file" >/dev/null 2>/dev/null </dev/null
++	stream: mtvp -W$window - 2>/dev/null 1>/dev/null
++	loop:mtvp -l -W$window "$file"
++	: mtvp -W$window "$file"
++	loop: xanim +Av100 -Zr +W$window +q +f "$file"
++	: xanim +Av100 -Zr +W$window +q +Ze +f "$file"
+ 
+ video/msvideo: avi: AVI animation
+ video/x-msvideo: avi: AVI animation
+@@ -36,7 +43,7 @@
+ audio/x-mid: midi,mid: MIDI audio file
+ audio/midi: midi,mid: MIDI audio file
+ audio/x-midi: midi,mid: MIDI audio file
+-	: timidity -s 48000 -a -idqqqqqqq "$file" >/dev/null 2>/dev/null
++	exits: timidity -s 48000 -a -idqqqqqqq "$file" >/dev/null 2>/dev/null
+ 	: playmidi $file
+ 
+ audio/mod: mod: Soundracker audio Module
+@@ -74,29 +81,17 @@
+ audio/x-psid: psid,sid,dat: Commodore 64 audio
+ 	stream: sidplay -16 -f44100 -a - >/dev/null 2>/dev/null
+ 
+-
+ audio/basic: au,snd: Basic audio file
+ audio/x-basic: au,snd: Basic audio file
+ 	loop: xanim +Av100 -Zr +W$window +q +f "$file"
+  	: xanim +Av100 -Zr +W$window +q +f +Ze "$file"
+ 
+-
+ audio/wav:wav:Microsoft wave file
+ audio/x-wav:wav:Microsoft wave file
+-	stream preload: splay -W
+-	repeat swallow(alsaplayer): alsaplayer -q "$file" >/dev/null
+-	: wavplay -q "$file"
+-	stream preload: bplay 1>/dev/null 2>/dev/null
+-	: bplay 1>/dev/null 2>/dev/null "$file"
+-	: splay "$file"
+-	nokill exits:xmms "$file"
+-	loop: xanim +Av100 -Zr +W$window +q +f "$file"
+- 	: xanim +Av100 -Zr +W$window +q +f +Ze "$file"
++	: play "$file"
+ 	
+ image/tiff: tiff,tif: TIFF image
+ image/x-tiff: tiff,tif: TIFF image
+-image/png: png: PNG image
+-image/x-png: png: PNG image
+ 	repeat swallow(gqview) fill: gqview -t "$file" >/dev/null 2>/dev/null
+ 	repeat swallow(display) fill: display "$file"
+ 	repeat swallow(Sdtimage) fill: sdtimage "$file"
+@@ -107,7 +102,7 @@
+ 	exits: xli -quiet -windowid $window "$file"
+ 
+ image/sun-raster: rs: SUN raster image
+-image/x-sun-raster: rs: SUN raster image
++image/x-sun-raster: rs: SUNu raster image
+ image/x-MS-bmp: bmp: Windows Bitmap
+ image/x-bmp: bmp: Windows Bitmap
+ image/bmp: bmp: Windows Bitmap
+@@ -135,6 +130,7 @@
+ 	nokill exits:xmms "$file"
+ 	:internal:url
+ 
++audio/x-pn-realaudio: ra,rm,ram:Realaudio-plugin resource locator
+ audio/x-pn-realaudio-plugin:rpm:Realaudio-plugin resource locator
+ 	exits nokill: realplay "$file"
+ 
+@@ -144,9 +140,8 @@
+ text/x-pdf: pdf: PDF file
+ 	repeat swallow(documentShell) fill: acroread -geometry +9000+9000 -xrm '*userFrontEndProgram: FALSE' "$file"
+ 	repeat swallow(gv) fill: gv -safer -quiet -antialias -geometry +9000+9000 "$file" 2>/dev/null
+-	repeat swallow(xpdf) fill: xpdf -g +9000+9000 -err "$file"
+-
+-
++	repeat swallow(xpdf) fill: xpdf -g +9000+9000 "$file"
++	
+ application/x-dvi: dvi: DVI file
+ 	repeat swallow(xdvi) fill: xdvi -safer -hush -geometry +9000+9000 "$file"
+ 
+@@ -159,12 +154,7 @@
  application/rtf: rtf: Rich Text Format
  application/x-msword: doc, dot: Microsoft Word Document
  application/msword: doc, dot: Microsoft Word Document
 -	repeat swallow(AbiWord) fill: abiword -nosplash -geometry +9000+9000 "$file" >/dev/null 2>/dev/null
+-	repeat swallow(PCFileViewer) fill: sdtpcv "$file"
+-	repeat swallow(PCFileViewer) fill: /opt/SUNWdtpcv/bin/sdtpcv "$file"
+-
 +	repeat swallow(AbiWord) fill: abiword --nosplash "$file" >/dev/null 2>/dev/null
- 	repeat swallow(PCFileViewer) fill: sdtpcv "$file"
- 	repeat swallow(PCFileViewer) fill: /opt/SUNWdtpcv/bin/sdtpcv "$file"
  
+ application/vnd.ms-excel: xls, xlb: Microsoft Excel Document
+ 	repeat swallow(PluggerGnumeric) fill: gnumeric --class PluggerGnumeric "$file"
+-	repeat swallow(PCFileViewer) fill: sdtpcv "$file"
+-	repeat swallow(PCFileViewer) fill: /opt/SUNWdtpcv/bin/sdtpcv "$file"
