@@ -2,12 +2,13 @@ Summary:	Mozilla multimedia plugin
 Summary(pl):	Wtyczka Mozilli do multimediów
 Name:		mozilla-plugin-plugger
 Version:	4.0
-Release:	5
+Release:	6
 License:	GPL
 Group:		X11/Applications/Multimedia
 Source0:	http://fredrik.hubbe.net/plugger/plugger-%{version}.tar.gz
 Source1:	%{name}-npunix.c
 Patch0:		%{name}-instance.patch
+Patch1:		%{name}-pluggerrc.patch
 URL:		http://fredrik.hubbe.net/plugger.html
 Prereq:		mozilla-embedded
 BuildRequires:	mozilla-embedded-devel
@@ -32,6 +33,7 @@ czy tracker.
 %prep
 %setup -q -n plugger-%{version}
 %patch0 -p1
+%patch1 -p1
 mkdir common
 cp -f %{SOURCE1} common/npunix.c
 
