@@ -2,7 +2,7 @@ Summary:	Mozilla multimedia plugin
 Summary(pl):	Wtyczka Mozilli do multimediów
 Name:		mozilla-plugin-plugger
 Version:	4.0
-Release:	4
+Release:	5
 License:	GPL
 Group:		X11/Applications/Multimedia
 Source0:	http://fredrik.hubbe.net/plugger/plugger-%{version}.tar.gz
@@ -17,12 +17,17 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 %define		_mandir		%{_prefix}/man
 
 %description
-This package contains flash plugin for Mozilla based browsers, i.e.
-mozilla itself, galeon or skipstone.
+Plugger is a plugin which can show many types of multimedia inside
+your Netscape or Mozilla-based browser (mozilla itself, galeon,
+skipstone, light). To accomplish this, Plugger uses external programs
+such as xanim, mtv, timidity and tracker.
 
 %description -l pl
-Pakiet zawiera plugin dla technologii Flash dla przegl±darek opartych
-na Mozilli, np.: mozilli jako takiej, galeona czy te¿ skipstone'a.
+Pakiet zawiera wtyczkê, która pozwala na wy¶wietlanie wielu rodzajów
+multimediów wewn±trz Netscape lub przegl±darki bazuj±cej na Mozilli
+(mozilli jako takiej, galeona, skipstone'a, lighta). Aby to uzyskaæ,
+Plugger u¿ywa zewnêtrznych programów, takich jak xanim, mtv, timidity
+czy tracker.
 
 %prep
 %setup -q -n plugger-%{version}
