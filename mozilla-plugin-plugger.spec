@@ -12,10 +12,11 @@ Source1:	%{name}-npunix.c
 Patch0:		%{name}-instance.patch
 Patch1:		%{name}-pluggerrc.patch
 URL:		http://fredrik.hubbe.net/plugger.html
-Prereq:		mozilla-embedded
 BuildRequires:	mozilla-embedded-devel
+PreReq:		mozilla-embedded
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
+%define		mozilladir	/usr/lib/mozilla
 
 %description
 Plugger is a plugin which can show many types of multimedia inside
@@ -44,19 +45,19 @@ mkdir common
 cp -f %{SOURCE1} common/npunix.c
 
 %build
-CF="%{rpmcflags} -fpic -I%{_includedir}/mozilla"
-CF="$CF -I%{_includedir}/mozilla/java -I/usr/include/nspr -I%{_includedir}/mozilla/plugin"
+CF="%{rpmcflags} -fpic -I/usr/include/mozilla"
+CF="$CF -I/usr/include/mozilla/java -I/usr/include/nspr -I/usr/include/mozilla/plugin"
 %{__make} all \
         XCFLAGS="$CF" NORM_CFLAGS="$CF" \
         XLDFLAGS=-shared \
         CC=%{__cc} LD=%{__cc} \
-        SDK=. X11=%{_prefix}
+        SDK=. X11=/usr/X11R6
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT{%{_libdir}/mozilla/plugins,%{_bindir}} \
+install -d $RPM_BUILD_ROOT{%{mozilladir}/plugins,%{_bindir}} \
 	$RPM_BUILD_ROOT{%{_mandir}/man7,%{_sysconfdir}}
-install *.so $RPM_BUILD_ROOT%{_libdir}/mozilla/plugins
+install *.so $RPM_BUILD_ROOT%{mozilladir}/plugins
 install pluggerrc $RPM_BUILD_ROOT%{_sysconfdir}
 install plugger-%{version} $RPM_BUILD_ROOT%{_bindir}
 install *.7 $RPM_BUILD_ROOT%{_mandir}/man7
@@ -69,7 +70,7 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc README
 %attr(755,root,root) %{_bindir}/*
-%attr(755,root,root) %{_libdir}/mozilla/plugins/*.so
+%attr(755,root,root) %{mozilladir}/plugins/*.so
 %{_mandir}/*/*
 %config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/pluggerrc
 %{_sysconfdir}/pluggerrc-*
