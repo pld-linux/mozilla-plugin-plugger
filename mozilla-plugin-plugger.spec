@@ -1,5 +1,7 @@
 Summary:	Mozilla multimedia plugin
+Summary(es):	Streaming Netscape Plugin
 Summary(pl):	Wtyczka Mozilli do multimediów
+Summary(pt_BR):	Plugin para o Netscape para streaming.
 Name:		mozilla-plugin-plugger
 Version:	4.0
 Release:	6
@@ -23,12 +25,18 @@ your Netscape or Mozilla-based browser (mozilla itself, galeon,
 skipstone, light). To accomplish this, Plugger uses external programs
 such as xanim, mtv, timidity and tracker.
 
+%description -l es
+Streaming Multimedia plugin for UNIX Netscape.
+
 %description -l pl
 Pakiet zawiera wtyczkê, która pozwala na wy¶wietlanie wielu rodzajów
 multimediów wewn±trz Netscape lub przegl±darki bazuj±cej na Mozilli
 (mozilli jako takiej, galeona, skipstone'a, lighta). Aby to uzyskaæ,
 Plugger u¿ywa zewnêtrznych programów, takich jak xanim, mtv, timidity
 czy tracker.
+
+%description -l pt_BR
+Plugin para o Netscape para streaming.
 
 %prep
 %setup -q -n plugger-%{version}
