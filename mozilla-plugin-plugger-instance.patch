@@ -1,0 +1,11 @@
+--- plugger-4.0/plugger.c.orig  Fri May 17 14:20:19 2002
++++ plugger-4.0/plugger.c       Fri May 17 14:20:33 2002
+@@ -620,7 +620,7 @@
+ }
+ 
+ /* Let netscape know things about plugger */
+-NPError NPP_GetValue(void *future, NPPVariable variable, void *value)
++NPError NPP_GetValue(NPP instance, NPPVariable variable, void *value)
+ {
+   NPError err = NPERR_NO_ERROR;
+ 
