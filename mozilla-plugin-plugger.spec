@@ -32,7 +32,7 @@ cp %{SOURCE1} common/npunix.c
 
 %build
 CF="%{rpmcflags} -fpic -I%{_includedir}/mozilla"
-CF="$CF -I%{_includedir}/mozilla/java -I/usr/include/nspr"
+CF="$CF -I%{_includedir}/mozilla/java -I/usr/include/nspr -I%{_includedir}/mozilla/plugin"
 make all \
         XCFLAGS="$CF" NORM_CFLAGS="$CF" \
         XLDFLAGS=-shared \
