@@ -1,7 +1,7 @@
 Summary:	Mozilla multimedia plugin
 Summary(es):	Streaming Netscape Plugin
 Summary(pl):	Wtyczka Mozilli do multimediów
-Summary(pt_BR):	Plugin para o Netscape para streaming.
+Summary(pt_BR):	Plugin para o Netscape para streaming
 Name:		mozilla-plugin-plugger
 Version:	4.0
 Release:	6
