@@ -8,6 +8,7 @@ Release:	6
 License:	GPL
 Group:		X11/Applications/Multimedia
 Source0:	http://fredrik.hubbe.net/plugger/plugger-%{version}.tar.gz
+# Source0-md5:	bf39c1405760183a01b8ec8fbfa6d430
 Source1:	%{name}-npunix.c
 Patch0:		%{name}-instance.patch
 Patch1:		%{name}-pluggerrc.patch
