@@ -3,18 +3,17 @@ Summary(es):	Streaming Netscape Plugin
 Summary(pl):	Wtyczka Mozilli do multimediów
 Summary(pt_BR):	Plugin para o Netscape para streaming
 Name:		mozilla-plugin-plugger
-Version:	4.0
-Release:	6
+Version:	5.1.3
+Release:	1
 License:	GPL
 Group:		X11/Applications/Multimedia
 Source0:	http://fredrik.hubbe.net/plugger/plugger-%{version}.tar.gz
-# Source0-md5:	bf39c1405760183a01b8ec8fbfa6d430
-Source1:	%{name}-npunix.c
-Patch0:		%{name}-instance.patch
-Patch1:		%{name}-pluggerrc.patch
+# Source0-md5:	576e32a13955330ee3f7dca3583fcd62
 URL:		http://fredrik.hubbe.net/plugger.html
 BuildRequires:	mozilla-embedded-devel
+Requires:	m4
 PreReq:		mozilla-embedded
+Obsoletes:      mozilla-plugin-mozplugger
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		mozilladir	/usr/%{_lib}/mozilla
@@ -40,19 +39,10 @@ Plugin para o Netscape para streaming.
 
 %prep
 %setup -q -n plugger-%{version}
-%patch0 -p1
-%patch1 -p1
-mkdir common
-cp -f %{SOURCE1} common/npunix.c
 
 %build
-CF="%{rpmcflags} -fpic -I/usr/include/mozilla"
-CF="$CF -I/usr/include/mozilla/java -I/usr/include/nspr -I/usr/include/mozilla/plugin"
-%{__make} all \
-        XCFLAGS="$CF" NORM_CFLAGS="$CF" \
-        XLDFLAGS=-shared \
-        CC=%{__cc} LD=%{__cc} \
-        SDK=. X11=/usr/X11R6
+./configure
+%{__make}
 
 %install
 rm -rf $RPM_BUILD_ROOT
@@ -61,6 +51,8 @@ install -d $RPM_BUILD_ROOT{%{mozilladir}/plugins,%{_bindir}} \
 install *.so $RPM_BUILD_ROOT%{mozilladir}/plugins
 install pluggerrc $RPM_BUILD_ROOT%{_sysconfdir}
 install plugger-%{version} $RPM_BUILD_ROOT%{_bindir}
+install plugger-controller $RPM_BUILD_ROOT%{_bindir}
+install plugger-oohelper $RPM_BUILD_ROOT%{_bindir}
 install *.7 $RPM_BUILD_ROOT%{_mandir}/man7
 ln -sf pluggerrc $RPM_BUILD_ROOT%{_sysconfdir}/pluggerrc-%{version}
 
