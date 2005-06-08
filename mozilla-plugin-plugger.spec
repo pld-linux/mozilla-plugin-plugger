@@ -10,6 +10,7 @@ Group:		X11/Applications/Multimedia
 Source0:	http://fredrik.hubbe.net/plugger/plugger-%{version}.tar.gz
 # Source0-md5:	576e32a13955330ee3f7dca3583fcd62
 URL:		http://fredrik.hubbe.net/plugger.html
+BuildRequires:	XFree86-devel
 BuildRequires:	mozilla-embedded-devel
 Requires:	m4
 PreReq:		mozilla-embedded
@@ -65,5 +66,5 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/*
 %attr(755,root,root) %{mozilladir}/plugins/*.so
 %{_mandir}/*/*
-%config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/pluggerrc
+%config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/pluggerrc
 %{_sysconfdir}/pluggerrc-*
