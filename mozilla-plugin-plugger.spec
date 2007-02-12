@@ -1,7 +1,7 @@
 Summary:	Mozilla multimedia plugin
-Summary(es):	Streaming Netscape Plugin
-Summary(pl):	Wtyczka Mozilli do multimediów
-Summary(pt_BR):	Plugin para o Netscape para streaming
+Summary(es.UTF-8):   Streaming Netscape Plugin
+Summary(pl.UTF-8):   Wtyczka Mozilli do multimediÃ³w
+Summary(pt_BR.UTF-8):   Plugin para o Netscape para streaming
 Name:		mozilla-plugin-plugger
 Version:	5.1.3
 Release:	1
@@ -25,17 +25,17 @@ your Netscape or Mozilla-based browser (mozilla itself, galeon,
 skipstone, light). To accomplish this, Plugger uses external programs
 such as xanim, mtv, timidity and tracker.
 
-%description -l es
+%description -l es.UTF-8
 Streaming Multimedia plugin for UNIX Netscape.
 
-%description -l pl
-Pakiet zawiera wtyczkê, która pozwala na wy¶wietlanie wielu rodzajów
-multimediów wewn±trz Netscape lub przegl±darki bazuj±cej na Mozilli
-(mozilli jako takiej, galeona, skipstone'a, lighta). Aby to uzyskaæ,
-Plugger u¿ywa zewnêtrznych programów, takich jak xanim, mtv, timidity
+%description -l pl.UTF-8
+Pakiet zawiera wtyczkÄ™, ktÃ³ra pozwala na wyÅ›wietlanie wielu rodzajÃ³w
+multimediÃ³w wewnÄ…trz Netscape lub przeglÄ…darki bazujÄ…cej na Mozilli
+(mozilli jako takiej, galeona, skipstone'a, lighta). Aby to uzyskaÄ‡,
+Plugger uÅ¼ywa zewnÄ™trznych programÃ³w, takich jak xanim, mtv, timidity
 czy tracker.
 
-%description -l pt_BR
+%description -l pt_BR.UTF-8
 Plugin para o Netscape para streaming.
 
 %prep
