@@ -1,7 +1,7 @@
 Summary:	Mozilla multimedia plugin
-Summary(es.UTF-8):   Streaming Netscape Plugin
-Summary(pl.UTF-8):   Wtyczka Mozilli do multimediów
-Summary(pt_BR.UTF-8):   Plugin para o Netscape para streaming
+Summary(es.UTF-8):	Streaming Netscape Plugin
+Summary(pl.UTF-8):	Wtyczka Mozilli do multimediów
+Summary(pt_BR.UTF-8):	Plugin para o Netscape para streaming
 Name:		mozilla-plugin-plugger
 Version:	5.1.3
 Release:	1
